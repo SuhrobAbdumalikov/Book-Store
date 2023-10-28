@@ -21,18 +21,15 @@ function App() {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [cardItem, setCardItem] = useState([]);
-  // const [isloading, setIsloading] = useState(false);
   const [isLogged, setIsLogged] = useState(() =>
     localStorage.getItem("access_token")
   );
 
   const getData = async () => {
-    // setIsloading(true);
     const data = await instance.get("/user");
     if (data.data?.user) {
       setWishList(data.data?.user?.wishlist);
     }
-    // setIsloading(false);
   };
 
   const getCardData = async () => {
@@ -143,7 +140,6 @@ function App() {
               />
             }
           />
-          <Route path="/order" element={<Order />} />
           <Route
             path="/signUp"
             element={<SignUp setIsLogged={setIsLogged} />}
@@ -157,6 +153,7 @@ function App() {
             />
             <Route path="/cards" element={<MainCard />} />
             <Route element={<Cards />} path="/cart" />
+            <Route path="/order" element={<Order />} />
           </Route>
         </Routes>
       </Layout>
